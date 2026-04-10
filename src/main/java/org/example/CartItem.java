@@ -1,7 +1,25 @@
 package org.example;
 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
+public class CartItem {
+    private final Product product;
+    private int quantity;
+
+    public CartItem(Product product, int quantity) {
+        if (product == null) throw new IllegalArgumentException("product");
+        if (quantity <= 0) throw new IllegalArgumentException("quantity");
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public Product getProduct() { return product; }
+    public int getQuantity() { return quantity; }
+
+    public void changeQuantity(int newQuantity) {
+        if (newQuantity <= 0) throw new IllegalArgumentException("newQuantity");
+        this.quantity = newQuantity;
+    }
+
+    public double getLineTotal() {
+        return product.getPrice() * quantity;
     }
 }
